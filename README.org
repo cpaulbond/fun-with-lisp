@@ -1,0 +1,16 @@
+* Fun-With-Lisp
+
+This is a collection of things I have written while learning common
+lisp.
+
+** Usage
+
+** Installation
+
+** Copyright
+
+Copyright (c) 2022 C. Paul Bond
+
+** License
+
+Licensed under the mit License.

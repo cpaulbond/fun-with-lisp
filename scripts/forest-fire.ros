@@ -1,0 +1,30 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp(ql:quickload '(:fun-with-lisp) :silent t))
+
+(defpackage :ros.script.forest-fire
+  (:use :cl))
+(in-package :ros.script.forest-fire)
+
+(defconstant +default-config+
+  '((:description . "Default configuration")
+    (:rows . 30)
+    (:cols . 70)
+    (:time . 1000)
+    (:wait . .2)
+    (:skip . 0)
+    (:start-fire . 0.001)
+    (:grow-tree . 0.01)
+    (:new-tree . 0.5)))
+
+(defun main (&rest argv)
+  (fwl:simulate-forest-fire
+   (if (null argv)
+       +default-config+
+       (with-open-file (f (car argv)) (read f)))))
+
